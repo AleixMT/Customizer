@@ -1,0 +1,91 @@
+{
+  "name":"PyCharm Community",
+  "description": "Integrated development environment used in computer programming",
+  "version": "2021.3",
+  "tags": [
+    "editor",
+    "IDE",
+    "programming",
+    "text",
+    "customDesktop"
+  ],
+  "freedesktop_categories": [
+    "ComputerScience",
+    "Debugger",
+    "Development",
+    "IDE",
+    "WebDevelopment"
+  ],
+  "icon": "pycharm.png",
+  "steps":
+  [
+    {
+      "description": "Download the Pycharm Bundle",
+      "capability_selector": "download_and_decompress_not_in_place",
+      "parameters":
+      {
+        "url": "https://download.jetbrains.com/python/pycharm-community-2021.3.tar.gz"
+      }
+    },
+    {
+      "description": "Create a bash function to call pycharm in background and silently",
+      "capability_selector": "bashrc_append",
+      "parameters":
+      {
+        "template": "silentFunctionInWd"
+      }
+    },
+    {
+      "description": "Create a Desktop Launcher",
+      "capability_selector": "desktop_launcher",
+      "parameters":
+      {
+        "exec": "pycharm %F",
+        "window_class": "jetbrains-pycharm",
+        "actions":
+        [
+          {
+            "name": "Pycharm New Window",
+            "exec": "pycharm"
+          }
+        ]
+      }
+    },
+    {
+      "description": "Associate filetypes with the Desktop Launcher",
+      "capability_selector": "associated_filetypes",
+      "parameters":
+      {
+        "filetypes":
+        [
+          "text/sh",
+          "text/x-python",
+          "text/x-python3"
+        ]
+      }
+    },
+    {
+      "description": "Create a soft link to the pycharm binary in the path",
+      "capability_selector": "add_binary_to_path",
+      "parameters":
+      {
+        "path": "bin/pycharm.sh;pycharm"
+      }
+    },
+    {
+      "description": "Assoiates keyboard combination to launch program",
+      "capability_selector": "add_keybinding",
+      "parameters":
+      {
+        "keybindings":
+        [
+          {
+            "binary_path": "pycharm",
+            "keyboard_shortcut": "<Primary><Alt><Super>p",
+            "name": "Pycharm"
+          }
+        ]
+      }
+    }
+  ]
+}
